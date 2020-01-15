@@ -5,7 +5,7 @@ colorama==0.3.9
 console-menu==0.6.0
 control==0.8.2
 cycler==0.10.0
-Django==2.1.5
+Django==2.1.15
 enum34==1.1.6
 et-xmlfile==1.0.1
 frc-characterization==2020.227
