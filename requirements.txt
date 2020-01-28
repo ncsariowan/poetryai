@@ -8,8 +8,6 @@ cycler==0.10.0
 Django==2.1.5
 enum34==1.1.6
 et-xmlfile==1.0.1
-frc-characterization==2020.227
-frccontrol==2020.21
 freetype-py==2.1.0.post1
 glfw==1.8.2
 gunicorn==20.0.4
