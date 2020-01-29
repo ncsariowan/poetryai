@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
+    <title>Poetry AI</title>
+</head>
+<body>
+    <div id="container">
+        <div>
+            <h1>Poetry AI</h1>
+            <p id="subtitle">by Aidan Bell and Nathan Sariowan</p>
+        </div>
+        <div>
+            <p>
+                This website generates poems using a machine learning model.
+                <br> Made for Francis Parker's Poetry Week 2020.
+                <br><b>Coming soon!</b>
+            </p>
+        </div>
+        <div>
+            <form class="table">
+                <div>
+                    <div>Name:</div> 
+                    <div>
+                        <input type="text" name="name"></div><br>
+                </div>
+                <div>
+                    <div>Lines:</div>
+                    <div>
+                        
+                    <input type="number" name="number">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div>
+            <button id="generate">Generate</button>
+        </div>
+    </div>
+</body>
+</html>
