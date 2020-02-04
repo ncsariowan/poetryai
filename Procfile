@@ -1,4 +1,4 @@
-web: gunicorn poetryai:app --host 0.0.0.0 --port ${PORT}
+web: gunicorn poetryai:app 
 init: flask db init
 migrate: flask db migrate
 upgrade: flask db upgrade
