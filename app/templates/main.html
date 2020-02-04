@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
     <title>Poetry AI</title>
 </head>
+
 <body>
     <div id="container">
         <div>
@@ -22,24 +24,37 @@
             </p>
         </div>
         <div>
-            <form class="table">
-                <div>
-                    <div>Name:</div> 
+            
+        </div>
+        <form method="POST" action="/generate">
+            <div>
+
+                <div class="table">
                     <div>
-                        <input type="text" name="name"></div><br>
-                </div>
-                <div>
-                    <div>Lines:</div>
+                        <div>Root Phrase:</div>
+                        <div>
+                            <input type="text" name="root"></div>
+                    </div>
                     <div>
-                        
-                    <input type="number" name="number">
+                        <div>Number of Words:</div>
+                        <div>
+                            <input type="number" name="number">
+                        </div>
+                    </div><div>
+                        <div>Your Name (Optional):</div>
+                        <div>
+                            <input type="text" name="name">
+                        </div>
                     </div>
                 </div>
-            </form>
-        </div>
-        <div>
-            <button id="generate">Generate</button>
-        </div>
+            </div>
+            <div>
+                <div>
+                    <input type="submit" id="generate" value="Generate"></button>
+                </div>
+            </div>
+        </form>
     </div>
 </body>
+
 </html>

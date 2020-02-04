@@ -1,7 +1,47 @@
-from flask import render_template
-from app import app
+from flask import render_template, request, redirect
+from app import app, db
+from app.models import Poem
 
 @app.route('/')
-def hello_world():
+def main():
     return render_template("main.html")
-    # return "Hello World"
+
+@app.route('/generate', methods = ['POST'])
+def generate():
+    root = request.form['root']
+    name = request.form['name'] if request.form['name'] else "PoetryAI"
+
+    p = Poem(title=root, author=name, text="Poetry is cool\nI really like this poem\nThank you for reading")
+    db.session.add(p)
+    db.session.commit()
+
+    return redirect('/poem/' + str(p.id))
+
+@app.route('/poem/<id>')
+def profile(id):
+
+    p = Poem.query.get(id)
+    
+    if (p is None):
+        return redirect('/poem/notFound')
+
+    poem = {
+        'title': p.title,
+        'author': p.author,
+        'text': p.text.split("\n")
+    }
+
+    return render_template("poem.html", poem=poem)
+
+@app.route('/main')
+@app.route('/index')
+def returnToHome():
+    return main()
+
+@app.errorhandler(404)
+def notFound(error):
+    return render_template("404.html"), 404
+
+@app.route('/poem/notFound')
+def poemNotFound():
+    return render_template("404.html")

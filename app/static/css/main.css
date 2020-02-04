@@ -7,6 +7,12 @@ html, body {
     font-size: 16px;
 }
 
+/* @media only screen and (max-width: 600px) {
+    html, body {
+        font-size: 12px;
+    }
+} */
+
 #container {
     display: flex;
     flex-direction: column;
@@ -14,14 +20,22 @@ html, body {
     align-items: center;
     height: 100%;
     
+    padding-left: 10vw;
+    padding-right: 10vw;
+    
+    
 }
 
 #container div {
     display: flex;
     justify-content: center;
-    flex-direction: column;
     padding-top: 1vh;
     padding-bottom: 1vh; 
+}
+
+#container > div {
+
+    flex-direction: column;
 }
 
 h1 {
@@ -42,7 +56,8 @@ p {
 }
 
 .table {
-    display: table;
+    display: table !important;
+    border-spacing: 1vw;
 }
 
 .table div {
@@ -51,12 +66,12 @@ p {
 
 .table div * {
     display: table-cell !important;
-    padding-right: 2vw;
+    /* padding-right: 2vw; */
 }
 
  
 #generate {
-    margin-top: 5vh;
+    margin-top: 3vh;
     text-decoration: none;
     background-color: white;
     border: black 1px solid;
