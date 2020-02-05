@@ -15,8 +15,16 @@ html, body {
 #container {
     margin: 30px;
     padding-left: 10%;
-    
     padding-right: 10%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+}
+
+#container > div {
+    max-width: 1170px;
+    width: 100%;
 }
 
 
