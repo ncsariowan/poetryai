@@ -25,6 +25,7 @@ html, body {
 #container > div {
     max-width: 1170px;
     width: 100%;
+    display: block;
 }
 
 
