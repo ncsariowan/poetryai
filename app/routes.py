@@ -45,3 +45,7 @@ def notFound(error):
 @app.route('/poem/notFound')
 def poemNotFound():
     return render_template("404.html")
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
