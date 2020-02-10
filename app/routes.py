@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect
 from app import app, db
 from app.models import Poem
+from app.ml import generate_poem
 
 @app.route('/')
 def main():
@@ -10,10 +11,20 @@ def main():
 def generate():
     root = request.form['root']
     name = request.form['name'] if request.form['name'] else "PoetryAI"
+    numWords = request.form['number']
 
-    p = Poem(title=root, author=name, text="Poetry is cool\nI really like this poem\nThank you for reading")
+    poemData = {
+        "root": root,
+        "numWords": numWords
+    }
+
+    #generate poem
+    poemText = generate_poem(poemData=poemData)
+
+    p = Poem(title=root, author=name, numWords=numWords, text="Poetry is cool\nI really like this poem\nThank you for reading")
     db.session.add(p)
     db.session.commit()
+
 
     return redirect('/poem/' + str(p.id))
 

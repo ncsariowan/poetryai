@@ -67,3 +67,9 @@ a {
 .space {
     height: 2rem;
 }
+
+@media only screen and (max-width: 660px) {
+    #container {
+        padding: 0;
+    }
+}
