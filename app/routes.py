@@ -11,11 +11,11 @@ def main():
 def generate():
     root = request.form['root']
     name = request.form['name'] if request.form['name'] else "PoetryAI"
-    numWords = request.form['number']
+    numWords = request.form['number'] or 100
 
     poemData = {
         "root": root,
-        "numWords": numWords
+        "numWords": numWords 
     }
 
     #generate poem
