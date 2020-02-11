@@ -8,23 +8,45 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/poem.css') }}">
     <title>{{ poem.title }} - PoetryAI</title>
+
+    <script>
+
+        function copyText(text) {
+            var e = document.createElement("textarea");
+            e.value = text;
+            document.body.appendChild(e);
+            e.select();
+            document.execCommand("copy");
+            document.body.removeChild(e);
+
+            document.getElementById("copy").innerHTML = "Copied!";
+        }
+
+    </script>
 </head>
 
 <body>
     <div id="header">
-        <a id="logo" href="{{ url_for('main') }}"><h1>PoetryAI</h1></a>
+        <a id="logo" href="{{ url_for('main') }}">
+            <h1>PoetryAI</h1>
+        </a>
     </div>
     <div id="container">
         <div>
             <div id="title">
                 <h2>{{ poem.title }}</h2>
-        
+
                 <h3>By {{ poem.author }}</h3>
             </div>
             <div id="poem">
                 {% for line in poem.text %}
-                    <p>{{line}}</p>
+                <p>{{line}}</p>
                 {% endfor %}
+            </div>
+            <div id="footer">
+                <p>Poem was generated {{ poem.timestamp }} with seed phrase "{{ poem.seed}}." {{ poem.numWords }} words.
+                    <span class="copy" id="copy" onclick="copyText(`{{ request.base_url }}`)">Copy the link to this poem.</span>
+                </p>
             </div>
         </div>
     </div>

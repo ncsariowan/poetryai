@@ -2,26 +2,34 @@ from flask import render_template, request, redirect
 from app import app, db
 from app.models import Poem
 from app.ml import generate_poem
+from app.forms import PoemForm
+import datetime
 
 @app.route('/')
 def main():
-    return render_template("main.html")
+
+    form = PoemForm()
+
+    return render_template("main.html", form=form)
 
 @app.route('/generate', methods = ['POST'])
 def generate():
-    root = request.form['root']
-    name = request.form['name'] if request.form['name'] else "PoetryAI"
-    numWords = request.form['number'] or 100
 
+    # get things from form
+    seed = request.form['seed']
+    author = request.form['author'] if request.form['author'] else "PoetryAI"
+    numWords = request.form['numWords'] or 100
+
+    # prepare data for running model
     poemData = {
-        "root": root,
+        "seed": seed,
         "numWords": numWords 
     }
 
     #generate poem
     poemText = generate_poem(poemData=poemData)
 
-    p = Poem(title=root, author=name, numWords=numWords, text="Poetry is cool\nI really like this poem\nThank you for reading")
+    p = Poem(title=seed, seed=seed, author=author, numWords=numWords, text=poemText, timestamp=datetime.datetime.now())
     db.session.add(p)
     db.session.commit()
 
@@ -36,10 +44,16 @@ def profile(id):
     if (p is None):
         return redirect('/poem/notFound')
 
+    poem = p
+    
+
     poem = {
         'title': p.title,
         'author': p.author,
-        'text': p.text.split("\n")
+        'text': p.text.split("\n"),
+        'seed': p.seed if p.seed else p.title,
+        'numWords': p.numWords,
+        'timestamp': p.timestamp.strftime("%c") if p.timestamp else ""
     }
 
     return render_template("poem.html", poem=poem)

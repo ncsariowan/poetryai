@@ -30,13 +30,13 @@ html, body {
 #container div {
     display: flex;
     justify-content: center;
-    padding-top: 1vh;
-    padding-bottom: 1vh; 
 }
 
 #container > div {
 
     flex-direction: column;
+    padding-top: 1vh;
+    padding-bottom: 1vh; 
 }
 
 h1 {
@@ -82,7 +82,7 @@ a {
 
 .table {
     display: table !important;
-    border-spacing: 1vw;
+    border-spacing: 0.5vw;
 }
 
 .table div {
@@ -94,9 +94,13 @@ a {
     /* padding-right: 2vw; */
 }
 
- 
-#generate {
+
+form {
     margin-top: 3vh;
+}
+ 
+#submit {
+    margin-top: 7vh;
     text-decoration: none;
     background-color: white;
     border: black 1px solid;
@@ -109,7 +113,7 @@ a {
     font-family: 'Merriweather', serif;
 }
 
-#generate:hover {
+#submit:hover {
     background-color: lightgray;
     opacity: 0.75;
 }

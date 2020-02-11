@@ -32,26 +32,30 @@
 
                 <div class="table">
                     <div>
-                        <div>Root Phrase:</div>
-                        <div>
-                            <input type="text" name="root"></div>
+                        <div>{{ form.hidden_tag() }}</div>
                     </div>
                     <div>
-                        <div>Number of Words:</div>
+                        <div>{{ form.seed.label }}</div>
                         <div>
-                            <input type="number" name="number">
+                            {{ form.seed() }}
+                        </div>
+                    </div>
+                    <div>
+                        <div>{{ form.numWords.label }}</div>
+                        <div>
+                            {{ form.numWords() }}
                         </div>
                     </div><div>
-                        <div>Your Name (Optional):</div>
+                        <div>{{ form.author.label }}</div>
                         <div>
-                            <input type="text" name="name">
+                            {{ form.author() }}
                         </div>
                     </div>
                 </div>
             </div>
             <div>
                 <div>
-                    <input type="submit" id="generate" value="Generate"></button>
+                    {{ form.submit() }}
                 </div>
             </div>
         </form>
