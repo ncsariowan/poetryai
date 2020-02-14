@@ -3,29 +3,84 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
     <title>Poetry AI</title>
+    <script>
+        window.onload = function () {
+
+            document.getElementById("submit-div").onclick = function () {
+                document.getElementById("modal-container").style.display = "block";
+                setTimeout(function () {
+                    document.getElementById("modal-container").style.opacity = "1";
+                }, 10)
+
+
+                var wordLoader = document.getElementById("word-loader");
+
+                for (var i = 0; i < 20; i++) {
+                    span = document.createElement("span");
+                    span.innerHTML = randomLetter();
+                    wordLoader.appendChild(span);
+                }
+
+
+                setInterval(function () {
+                    var wordLoader = document.getElementById("word-loader");
+
+                    var children = wordLoader.children;
+
+                    var repeat = Math.ceil(Math.random() * 5);
+
+                    for (var i = 0; i < repeat; i++) {
+
+                        var elem = children[Math.floor(Math.random() * children.length)];
+
+                        elem.innerHTML = randomLetter();
+                    }
+
+                }, 30)
+
+            }
+        }
+
+        function randomLetter() {
+            var result = '';
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ';
+            return characters.charAt(Math.floor(Math.random() * characters.length));;
+        }
+    </script>
 </head>
 
 <body>
+    <div id="modal-container" class="modal-container">
+        <div id="modal">
+            <div class="modal-content">
+                <span>Generating Poem...</span>
+                <div id="word-loader">
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="container">
         <div>
-            <h1>Poetry AI</h1>      
-            <h2 id="subtitle">by Aidan Bell and Nathan Sariowan</h2>      
-            <h3>version 0.2</h3>
+            <h1>Poetry AI</h1>
+            <h2 id="subtitle">by Aidan Bell and Nathan Sariowan</h2>
+            <h3>version {{ version }}</h3>
 
         </div>
         <div>
             <p id="description">
-                This website generates poems using a machine learning model and publishes it to a unique link you can share with your friends! 
+                This website generates poems using a machine learning model and publishes it to a unique link you can
+                share with your friends!
             </p>
             <p><a href="{{ url_for('about') }}">About</a></p>
         </div>
         <div>
-            
+
         </div>
         <form method="POST" action="/generate">
             <div>
@@ -45,7 +100,8 @@
                         <div>
                             {{ form.numWords() }}
                         </div>
-                    </div><div>
+                    </div>
+                    <div>
                         <div>{{ form.author.label }}</div>
                         <div>
                             {{ form.author() }}
@@ -54,7 +110,7 @@
                 </div>
             </div>
             <div>
-                <div>
+                <div id="submit-div">
                     {{ form.submit() }}
                 </div>
             </div>

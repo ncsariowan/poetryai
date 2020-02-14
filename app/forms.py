@@ -5,6 +5,6 @@ from wtforms.validators import DataRequired
 
 class PoemForm(FlaskForm):
     seed = StringField('Seed Phrase', validators=[DataRequired()])
-    numWords = IntegerField('Number of Words', validators=[DataRequired()])
+    numWords = IntegerField('Number of Words', validators=[DataRequired()],  default=100)
     author = StringField('Your name (optional)')
     submit = SubmitField('Generate')

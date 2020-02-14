@@ -22,13 +22,6 @@ html, body {
     justify-items: center;
 }
 
-#container > div {
-    max-width: 550px;
-    width: 100%;
-    display: block;
-}
-
-
 h2 {
     font-weight: 600;
     font-size: 1.5rem;
@@ -42,6 +35,12 @@ h3 {
     font-size: 1rem;
     margin: 0;
     margin-bottom: 9px;
+}
+
+#poemContainer {
+    width: 75%;
+    
+    display: block;
 }
 
 #poem {
@@ -69,7 +68,8 @@ a {
 }
 
 #footer {
-    margin-top: 2rem;
+    margin-top: 60px;
+    width: 80%;
     font-size: 0.8rem;
     color: lightgrey;
 }
@@ -79,8 +79,17 @@ a {
     cursor: pointer;
 }
 
+
 @media only screen and (max-width: 660px) {
     #container {
         padding: 0;
+    }
+
+    #footer {
+        width: 100%;
+    }
+
+    #poemContainer {
+        width: 100%;
     }
 }

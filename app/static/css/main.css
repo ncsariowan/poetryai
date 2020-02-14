@@ -19,10 +19,8 @@ html, body {
     justify-content: center;
     align-items: center;
     /* min-height: 100vh; */
-    
     padding-left: 10vw;
     padding-right: 10vw;
-    
     padding-top: 4rem;
     padding-bottom: 4rem;
 }
@@ -32,11 +30,10 @@ html, body {
     justify-content: center;
 }
 
-#container > div {
-
+#container>div {
     flex-direction: column;
     padding-top: 1vh;
-    padding-bottom: 1vh; 
+    padding-bottom: 1vh;
 }
 
 h1 {
@@ -51,13 +48,11 @@ h2 {
     margin: 0.5rem;
     /* font-weight: 600; */
     text-align: center;
-    
     color: grey;
     font-size: 1.2rem;
 }
 
 h3 {
-    
     margin: 0;
     text-align: center;
     font-size: 1rem;
@@ -94,11 +89,10 @@ a {
     /* padding-right: 2vw; */
 }
 
-
 form {
     margin-top: 3vh;
 }
- 
+
 #submit {
     margin-top: 7vh;
     text-decoration: none;
@@ -111,11 +105,65 @@ form {
     opacity: 1;
     font-size: 1.2rem;
     font-family: 'Merriweather', serif;
+    transition: background-color 0.5s ease;
 }
 
 #submit:hover {
-    background-color: lightgray;
-    opacity: 0.75;
+    background-color: rgb(243, 243, 243);
+}
+
+.modal-container {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: #ffffff;
+    /* Fallback color */
+    /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
+    opacity: 0;
+    transition-timing-function: linear, step-end, step-end;
+    transition: opacity 0.6s ease-in;
+}
+
+#modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    /* border: 1px solid #888; */
+    width: 40%;
+    /* Could be more or less, depending on screen size */
+    height: 20%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#word-loader {
+    margin-top: 10%;
+    overflow: hidden;
+    justify-content: center;
+    width: 100%;
 }
 
 @media only screen and (max-width: 660px) {
