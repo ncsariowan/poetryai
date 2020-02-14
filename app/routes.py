@@ -99,7 +99,7 @@ def getPoem(id):
         'numWords': p.numWords,
         'timestamp': p.timestamp.strftime("%c") if p.timestamp else "",
         'id': id,
-        'url': url_for("poem", id=str(id))
+        'url': url_for("poem", id=str(id), _external=True)
     }
 
     data = {}
