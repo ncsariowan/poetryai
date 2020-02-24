@@ -6,7 +6,7 @@ from app.forms import PoemForm
 import datetime
 import time
 
-VERSION = "0.3"
+VERSION = "0.4"
 
 
 @app.route('/')
@@ -17,7 +17,7 @@ def main():
     form.seed.default = "test"
     form.process()
 
-    return render_template("main.html", form=form)
+    return render_template("main.html", form=form, version=VERSION)
 
 
 @app.route('/generate', methods=['POST'])
@@ -83,30 +83,17 @@ def poem(id):
 
 
 @app.route('/api/v1.0/poem/<int:id>', methods=['GET'])
-def getPoem(id):
+def getPoemAPI(id):
     p = Poem.query.get(id)
 
     if (p is None):
         return make_response(jsonify({'error': 'Not found'}), 404)
 
-
-    poem = {
-        'title': p.title,
-        'author': p.author,
-        'text': p.text,
-        'textArray': p.text.split("\n"),
-        'seed': p.seed if p.seed else p.title,
-        'numWords': p.numWords,
-        'timestamp': p.timestamp.strftime("%c") if p.timestamp else "",
-        'id': id,
-        'url': url_for("poem", id=str(id), _external=True)
-    }
-
     data = {}
 
     data["poems"] = {}
 
-    data["poems"][id] = poem
+    data["poems"][id] = formatPoemForAPI(p=p)
 
     return jsonify(data)
 
@@ -133,3 +120,24 @@ def poemNotFound():
 @app.route('/about')
 def about():
     return render_template("about.html")
+
+@app.route('/api')
+def api():
+    return render_template("api.html")
+
+def formatPoemForAPI(p):
+    poem = {
+        'title': p.title,
+        'author': p.author,
+        'text': p.text,
+        'textArray': p.text.split("\n"),
+        'seed': p.seed if p.seed else p.title,
+        'numWords': p.numWords,
+        'timestamp': p.timestamp.strftime("%c") if p.timestamp else "",
+        'id': p.id,
+        'url': url_for("poem", id=str(p.id), _external=True)
+    }
+
+    return poem
+
+
