@@ -37,8 +37,6 @@ def generate():
 
     pid = addPoemToDB(poemData)
 
-    time.sleep(2)
-
     return redirect('/poem/' + str(pid))
 
 
