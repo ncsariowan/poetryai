@@ -36,7 +36,7 @@
             <div id="title">
                 <h2>{{ poem.title }}</h2>
 
-                <h3>By {{ poem.author }}</h3>
+                <h3>By {{ poem.author }} and {{ poem.poet }}</h3>
             </div>
             <div id="poem">
                 {% for line in poem.textArray %}

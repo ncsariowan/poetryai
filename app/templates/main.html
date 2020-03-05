@@ -92,9 +92,18 @@
                     <div>
                         <div>{{ form.seed.label }}</div>
                         <div>
-                            {{ form.seed() }}
+                            <textarea name="seed"></textarea>
                         </div>
                     </div>
+					
+					<div>
+						
+						<div>{{form.poet.label}}</div>
+                        <div>
+                            {{ form.poet() }}
+                        </div>
+					</div>
+					
                     <div>
                         <div>{{ form.numWords.label }}</div>
                         <div>

@@ -6,7 +6,7 @@ from app.forms import PoemForm
 import datetime
 import time
 
-VERSION = "0.4"
+VERSION = "1.0"
 
 
 @app.route('/')
@@ -14,7 +14,7 @@ def main():
 
     form = PoemForm()
 
-    form.seed.default = "test"
+    form.seed.default = ""
     form.process()
 
     return render_template("main.html", form=form, version=VERSION)
@@ -22,22 +22,25 @@ def main():
 
 @app.route('/generate', methods=['POST'])
 def generate():
-
+    #print(request.form['text'])
     # get things from form
+    poet = request.form['poet']
     seed = request.form['seed']
     author = request.form['author'] if request.form['author'] else "PoetryAI"
     numWords = request.form['numWords'] or 100
 
     # prepare data for running model
     poemData = {
+        "poet": poet,
         "seed": seed,
         "numWords": numWords,
-        "author": author
+        "author": author,
+        "poet": poet,
     }
 
     pid = addPoemToDB(poemData)
 
-    time.sleep(2)
+    time.sleep(.01)
 
     return redirect('/poem/' + str(pid))
 
@@ -49,6 +52,7 @@ def addPoemToDB(poemData):
     p = Poem(title=poemData["seed"],
              seed=poemData["seed"],
              author=poemData["author"],
+             poet=poemData["poet"],
              numWords=poemData["numWords"],
              text=poemText,
              timestamp=datetime.datetime.now())
@@ -67,17 +71,7 @@ def poem(id):
     if (p is None):
         return redirect('/poem/notFound')
 
-    poem = p
-
-    poem = {
-        'title': p.title,
-        'author': p.author,
-        'textArray': p.text.split("\n"),
-        'seed': p.seed if p.seed else p.title,
-        'numWords': p.numWords,
-        'timestamp': p.timestamp.strftime("%c") if p.timestamp else "",
-        'id': id,
-    }
+    poem = formatPoemForAPI(p)
 
     return render_template("poem.html", poem=poem, version=VERSION)
 
@@ -135,6 +129,7 @@ def formatPoemForAPI(p):
         'numWords': p.numWords,
         'timestamp': p.timestamp.strftime("%c") if p.timestamp else "",
         'id': p.id,
+        'poet': p.poet.capitalize(),
         'url': url_for("poem", id=str(p.id), _external=True)
     }
 

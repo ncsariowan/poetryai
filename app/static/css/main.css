@@ -25,6 +25,20 @@ html, body {
     padding-bottom: 4rem;
 }
 
+textarea {
+    
+    font-family: 'Merriweather', serif;
+}
+
+select {
+    font-family: 'Merriweather', serif;
+}
+
+
+input {
+    font-family: 'Merriweather', serif;
+}
+
 
 #container div {
     display: flex;
